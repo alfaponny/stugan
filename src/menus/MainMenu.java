@@ -2,6 +2,7 @@ package menus;
 
 import menus.CottageDetails.CottageDetails;
 import bookingsMenu.BookingsMenu;
+import menus.feedbackMenu.FeedbackMenu;
 import utility.Utility;
 
 import java.util.ArrayList;
@@ -43,7 +44,8 @@ public class MainMenu {
                 [3] Kontaktuppgifter
                 [4] Aktiviteter i området
                 [5] Boka stugan
-                [6] Avsluta
+                [6] Lämna eller läsa omdömen
+                [7] Avsluta
                 """);
         System.out.println("Skriv in ditt val: ");
     }
@@ -56,7 +58,7 @@ public class MainMenu {
         commands.add(new MenuCommand(new ContactDetails(scan)));
         commands.add(new MenuCommand(new LocalActivities(scan)));
         commands.add(new MenuCommand(new BookingsMenu(scan)));
-       // commands.add(new MenuCommand(new FeedbackMenu(scan)));
+        commands.add(new MenuCommand(new FeedbackMenu(scan)));
         commands.add(() -> System.exit(0));
         return commands;
     }
