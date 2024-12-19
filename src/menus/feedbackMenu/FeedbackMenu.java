@@ -4,6 +4,8 @@ import menus.MenuScreen;
 import utility.Utility;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class FeedbackMenu implements MenuScreen {
@@ -39,10 +41,13 @@ private final Scanner scan;
         }
     }
     private void writeFeedback() {
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
         System.out.println("Skriv in ditt omdöme och tryck på Enter för att spara ");
         String feedback = scan.nextLine();
         try(BufferedWriter bf = new BufferedWriter(new FileWriter("src/menus/feedbackMenu/feedback.txt", true))) {
-            bf.write(feedback);
+            bf.write(timeStamp + " " + feedback);
             bf.newLine();
             System.out.println("Ditt omdöme är sparat. Tack! ");
         } catch (IOException e) {
