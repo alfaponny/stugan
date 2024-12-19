@@ -18,12 +18,12 @@ public class CottageDetails implements MenuScreen {
     public void readFromFile() {
         String filePath = "src/Menus/CottageDetails/cottage_description.txt";
         //Detta är bara vid demo. Kommentera in vid tillfälle
-        if (Utility.macUser()) {
+      /*  if (Utility.macUser()) {
             filePath = System.getProperty("user.dir") + "/menus/CottageDetails/cottage_description.txt";
         } else {
             filePath = System.getProperty("user.dir") + "\\Menus\\CottageDetails\\cottage_description.txt";
 
-        }
+        }*/
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) !=null) {
@@ -36,7 +36,6 @@ public class CottageDetails implements MenuScreen {
 
     @Override
     public void runMenu() {
-        Utility.clearScreen();
         readFromFile();
         System.out.println("\n\"Skriv 'Exit' eller 'E' för att återgå till huvudmenyn:\" ");
 

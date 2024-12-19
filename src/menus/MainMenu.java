@@ -13,13 +13,19 @@ public class MainMenu {
     public MainMenu() {
         Utility.clearScreen();
         try (Scanner scan = new Scanner(System.in)) {
-            List<menus.MenuScreen> menuScreens = creatMenuScreens(scan);
+            List<Command> commands = createCommands(scan);
             mainMenuOptions();
             String line;
             while ((line = scan.nextLine()) !=null) {
                 try {
-                    menuScreens.get(Integer.parseInt(line)-1).runMenu(); //-1 Så att den stämmer med mainMenuOptions.
-                    mainMenuOptions();
+                    int menuOption = Integer.parseInt(line)-1;
+                    if(menuOption >= 0 && menuOption < commands.size()) {
+                        commands.get(menuOption).execute();
+                        mainMenuOptions();
+                    }else{
+                        throw new IndexOutOfBoundsException();
+                    }
+
                 }catch (Exception e) {
                     Utility.clearScreen();
                     mainMenuOptions();
@@ -42,16 +48,17 @@ public class MainMenu {
         System.out.println("Skriv in ditt val: ");
     }
 
-    public List<menus.MenuScreen> creatMenuScreens(Scanner scan) {
+    public List<Command> createCommands(Scanner scan) {
 
-        List<MenuScreen> menuScreens = new ArrayList<>();
-        menuScreens.add(new ActivityStorage(scan));
-        menuScreens.add(new CottageDetails(scan));
-        menuScreens.add(new ContactDetails(scan));
-        menuScreens.add(new LocalActivities(scan));
-        menuScreens.add(new BookingsMenu(scan));
-        menuScreens.add(()-> System.exit(0));
-        return menuScreens;
+        List<Command> commands = new ArrayList<>();
+        commands.add(new MenuCommand(new ActivityStorage(scan)));
+        commands.add(new MenuCommand(new CottageDetails(scan)));
+        commands.add(new MenuCommand(new ContactDetails(scan)));
+        commands.add(new MenuCommand(new LocalActivities(scan)));
+        commands.add(new MenuCommand(new BookingsMenu(scan)));
+       // commands.add(new MenuCommand(new FeedbackMenu(scan)));
+        commands.add(() -> System.exit(0));
+        return commands;
     }
 }
 

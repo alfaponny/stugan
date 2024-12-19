@@ -112,11 +112,11 @@ public class BookingsMenu implements menus.MenuScreen {
         filePath = "src/bookingsMenu/availableWeeks.properties";
 
         //Kommentera in vid demo av programmet. Detta möjliggör clear av konsolskärmen
-        if (Utility.macUser()) {
+      /*  if (Utility.macUser()) {
             filePath = System.getProperty("user.dir") + "/bookingsMenu/availableWeeks.properties";
         } else {
             filePath = System.getProperty("user.dir") + "\\bookingsMenu\\availableWeeks.properties";
-        }
+        }*/
 
         Properties properties = new Properties();
         String summerWeeks, winterWeeks;
